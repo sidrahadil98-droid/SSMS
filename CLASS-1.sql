@@ -57,3 +57,8 @@ AND salary<=88000;
 SELECT empName, designation, salary from Employee where not designation='Product Manager'
 OR salary > 88000;
 
+SELECT id, empName, designation, salary from Employee where designation='Product Manager'
+OR salary < 88000;
+
+-- between (2 se 6 tak ka record show hu) 
+SELECT * FROM Employee where id between 2 and 6;
