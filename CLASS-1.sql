@@ -97,6 +97,82 @@ SELECT SUM(salary) as total_salary FROM Employee;
 
 SELECT AVG(salary) as avg_salary FROM Employee;
 
-SELECT AVG(salary) as avg_salary FROM Employee;
 
-SELECT CONCAT(empName, 'has a designation of' , designation, 'has a salary of ', salary) as EmpDetails FROM Employee;
+SELECT CONCAT(empName, 'has a designation of' , designation,
+'has a salary of ', salary) as EmpDetails FROM Employee;
+
+SELECT * FROM Employee;
+
+-- Sub Queries
+SELECT empName, salary FROM Employee where salary < (SELECT AVG(salary) as avg_salary FROM Employee
+);
+
+SELECT empName, salary FROM Employee where salary > (SELECT AVG(salary) as avg_salary FROM Employee);
+
+SELECT empName, salary FROM Employee where salary >  (SELECT MIN(salary) as min_salary FROM Employee);
+SELECT empName, salary FROM Employee where salary <  (SELECT MAX(salary) as max_salary FROM Employee);
+
+-- Group BY
+
+SELECT city, COUNT(id) as EmpCount FROM Employee GROUP BY city;
+
+SELECT city, MAX(salary) as MaxSalary FROM Employee GROUP BY city;
+
+SELECT city, MIN(salary) as MinSalary FROM Employee GROUP BY city;
+
+SELECT city, SUM(salary) as TotalSalary FROM Employee GROUP BY city;
+
+INSERT INTO Employee(empName, designation, salary,city, depId) VALUES
+('Bisma', 'Manager', 98000, 'Karachi', null),
+('Humaira', 'Manager', 125000, 'Lahore', null),
+('Iqra', 'Manager', 330000, 'Islamabad', null);
+
+SELECT designation, COUNT(id) as EmpCount FROM Employee Group BY designation having designation = 'Manager';
+
+-- New TABLE OF DEPARTMENT
+	CREATE TABLE Department(
+		depId INT PRIMARY KEY IDENTITY(1,1),
+		depName VARCHAR(50) NOT NULL
+	);
+
+INSERT INTO Department VALUES
+('Academics'), ('SRO'), ('TECH'), ('Marketing'), ('Exam');
+
+SELECT * FROM Department;
+
+INSERT INTO Department VALUES
+('Placement'), ('Admin');
+
+--Truncate Table
+TRUNCATE TABLE Department;
+
+DROP TABLE Employee;
+
+CREATE TABLE Employee(
+	id INT PRIMARY KEY IDENTITY(1,1),
+	empName VARCHAR (255) NOT NULL,
+	designation VARCHAR (255) NOT NULL,
+	salary INT NOT NULL,
+	city VARCHAR (255) NOT NULL,
+	depId INT  
+	FOREIGN KEY (depId) references Department(depId)
+	--FK   own table key   ref      table-name(table key)     
+);
+
+INSERT INTO Employee(empName, designation, salary, city, depId) VALUES
+('Ahad', 'CAH', 480000, 'Karachi', 1),
+('Hanzala', 'Faculty Member', 80000, 'Karachi', 1),
+('Imran', 'Netword Assistant', 88000, 'Karachi', 3),
+('Rayyan', 'Admin Manager', 1280000, 'Karachi', 7),
+('Nabeel', 'SRO Head', 82000, 'Karachi', 2),
+('Farmil', 'Senior Marketing Agent', 90000, 'Karachi', 4),
+('Fasiha', 'Batch Coordinator', 75000, 'Karachi', 1),
+('Sidrah', 'Manager Academics', 178000, 'Karachi', 1),
+('Bisma', 'Examination Head', 265000, 'Karachi', 5),
+('Iqra',  'DCAH', 190000, 'Karachi', 1),
+('Humaira', 'SRO', 330000, 'Karachi', 2);
+
+SELECT * FROM Employee;
+
+SELECT empName, designation, depName, city, salary FROM Employee as emp
+INNER JOIN Department as d on emp.depId = d.depId;
