@@ -201,3 +201,17 @@ RIGHT JOIN  Employee as emp on d.depId =  emp.depId;
 SELECT empName, designation, depName, city, salary FROM Employee as emp
 FULL OUTER JOIN Department as d on emp.depId = d.depId;
 
+--VIEW
+CREATE VIEW [empDesignationName] AS SELECT empName, designation FROM Employee;
+
+SELECT * FROM empDesignationName;
+
+CREATE VIEW [DeptName] AS SELECT depName FROM Department;
+
+SELECT * FROM DeptName;
+
+-- SHOW VIEW
+SELECT name, create_date FROM sys.views;
+
+-- DROP VIEW 
+DROP VIEW empDeptName;
