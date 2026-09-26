@@ -77,7 +77,7 @@ SELECT
 FROM student AS std 
 INNER JOIN Course AS c ON std.c_id = c.c_id;
 
-
+-- 3 tables Full Joins
 SELECT 
     std.std_id, 
     std.std_Name, 
