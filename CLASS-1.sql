@@ -174,5 +174,30 @@ INSERT INTO Employee(empName, designation, salary, city, depId) VALUES
 
 SELECT * FROM Employee;
 
+-- INNER JOIN cooman data fetch
 SELECT empName, designation, depName, city, salary FROM Employee as emp
 INNER JOIN Department as d on emp.depId = d.depId;
+
+INSERT INTO Employee(empName, designation, salary, city)VALUES
+('Fahad', 'CAH', 480000, 'Karachi');
+
+
+
+-- LEFT JOIN 
+SELECT empName, designation, depName, city, salary FROM Employee as emp
+LEFT JOIN Department as d on emp.depId = d.depId; 
+
+SELECT empName, designation, depName, city, salary FROM Department as d 
+LEFT JOIN  Employee as emp on d.depId =  emp.depId; 
+
+-- RIGHT JOIN
+SELECT empName, designation, depName, city, salary FROM Employee as emp
+RIGHT JOIN Department as d on emp.depId = d.depId;
+
+SELECT empName, designation, depName, city, salary FROM Department as d 
+RIGHT JOIN  Employee as emp on d.depId =  emp.depId; 
+
+--FULL OUTER JOIN
+SELECT empName, designation, depName, city, salary FROM Employee as emp
+FULL OUTER JOIN Department as d on emp.depId = d.depId;
+
